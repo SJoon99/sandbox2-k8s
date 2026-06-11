@@ -1,0 +1,130 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sandbox2-argo-cd
+  namespace: argo
+  annotations:
+    helm.sh/resource-policy: keep
+    org.ulagbulag.io/owners: Ho Kim <ho.kim@smartx.kr>
+  labels:
+    app.kubernetes.io/version: 2.0.0-alpha.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: sandbox2-argo-cd
+    app.kubernetes.io/instance: smartx
+    org.ulagbulag.io/cluster: sandbox2
+    org.ulagbulag.io/group: ops
+    org.ulagbulag.io/phase: stable
+    org.ulagbulag.io/privileged: 'false'
+    org.ulagbulag.io/project: sandbox2-ops
+    org.ulagbulag.io/scale: small
+    org.ulagbulag.io/tower-cluster: sandbox2
+    org.ulagbulag.io/tower-project: sandbox2-ops
+spec:
+  destination:
+    name: sandbox2
+    namespace: argo
+  ignoreDifferences:
+  - jsonPointers:
+    - /data/oidc.openid_connect.name
+    - /data/oidc.openid_connect.issuer
+    - /data/oidc.openid_connect.clientID
+    - /data/oidc.openid_connect.clientSecret
+    - /data/server.secretkey
+    - /data/webhook.github.secret
+    kind: Secret
+    name: argocd-secret
+  project: sandbox2-ops
+  sources:
+  - repoURL: https://argoproj.github.io/argo-helm
+    chart: argo-cd
+    targetRevision: 9.3.7
+    helm:
+      releaseName: argo-cd
+      valuesObject:
+        applicationSet:
+          metrics:
+            enabled: false
+        configs:
+          cm:
+            resource.exclusions: "### Network resources created by the Kubernetes\
+              \ control plane and excluded to reduce the number of watched events\
+              \ and UI clutter\n- apiGroups:\n  - ''\n  - discovery.k8s.io\n  kinds:\n\
+              \  - Endpoints\n  - EndpointSlice\n### Internal Kubernetes resources\
+              \ excluded reduce the number of watched events\n- apiGroups:\n  - coordination.k8s.io\n\
+              \  kinds:\n  - Lease\n### Internal Kubernetes Authz/Authn resources\
+              \ excluded reduce the number of watched events\n- apiGroups:\n  - authentication.k8s.io\n\
+              \  - authorization.k8s.io\n  kinds:\n  - SelfSubjectReview\n  - TokenReview\n\
+              \  - LocalSubjectAccessReview\n  - SelfSubjectAccessReview\n  - SelfSubjectRulesReview\n\
+              \  - SubjectAccessReview\n### Intermediate Certificate Request excluded\
+              \ reduce the number of watched events\n- apiGroups:\n  - certificates.k8s.io\n\
+              \  kinds:\n  - CertificateSigningRequest\n- apiGroups:\n  - cert-manager.io\n\
+              \  kinds:\n  - CertificateRequest\n### Cilium internal resources excluded\
+              \ reduce the number of watched events and UI Clutter\n- apiGroups:\n\
+              \  - cilium.io\n  kinds:\n  - CiliumIdentity\n  - CiliumEndpoint\n \
+              \ - CiliumEndpointSlice\n### Kyverno intermediate and reporting resources\
+              \ excluded reduce the number of watched events and improve performance\n\
+              - apiGroups:\n  - kyverno.io\n  - reports.kyverno.io\n  - wgpolicyk8s.io\n\
+              \  kinds:\n  - PolicyReport\n  - ClusterPolicyReport\n  - EphemeralReport\n\
+              \  - ClusterEphemeralReport\n  - AdmissionReport\n  - ClusterAdmissionReport\n\
+              \  - BackgroundScanReport\n  - ClusterBackgroundScanReport\n  - UpdateRequest\n"
+          params:
+            application.namespaces: ''
+            resource.exclusions: "- apiGroups:\n    - cilium.io\n  kinds:\n    - CiliumIdentity\n\
+              \  clusters:\n    - \"*\"\n"
+          rbac:
+            policy.csv: 'g, admin, role:admin
+
+              g, sandbox2-admin, role:admin
+
+              g, ops, role:admin
+
+              g, sandbox2-ops, role:admin
+
+              g, sandbox2, role:readonly
+
+              '
+        controller:
+          metrics:
+            enabled: false
+        global:
+          addPrometheusAnnotations: false
+          domain: cd.argo.sandbox2.sandbox2.local
+          tolerations:
+          - effect: NoExecute
+            key: org.ulagbulag.io/bind
+            operator: Exists
+          - effect: NoExecute
+            key: org.ulagbulag.io/bind.profile
+            operator: Exists
+          - effect: NoExecute
+            key: org.ulagbulag.io/signed-out
+            operator: Exists
+        notifications:
+          metrics:
+            enabled: false
+        redis:
+          metrics:
+            enabled: false
+        repoServer:
+          metrics:
+            enabled: false
+        server:
+          ingress:
+            annotations:
+              cert-manager.io/cluster-issuer: sandbox2.sandbox2.local
+            enabled: false
+            ingressClassName: sandbox2.sandbox2.local
+          metrics:
+            enabled: false
+      valueFiles:
+      - $origin/apps/argo-cd/values.yaml
+  - repoURL: https://github.com/SJoon99/smartx-k8s.git
+    targetRevision: main
+    ref: origin
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ServerSideApply=true

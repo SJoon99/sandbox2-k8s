@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sandbox2
+  namespace: argo
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  annotations:
+    helm.sh/resource-policy: delete
+    org.ulagbulag.io/owners: Ho Kim <ho.kim@smartx.kr>
+  labels:
+    app.kubernetes.io/version: 2.0.0-alpha.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: sandbox2
+    app.kubernetes.io/instance: smartx
+    argocd.argoproj.io/instance: sandbox2
+    org.ulagbulag.io/cluster: sandbox2
+    org.ulagbulag.io/group: ops
+    org.ulagbulag.io/phase: stable
+    org.ulagbulag.io/privileged: 'true'
+    org.ulagbulag.io/project: sandbox2-ops
+    org.ulagbulag.io/scale: large
+    org.ulagbulag.io/tower-cluster: sandbox2
+    org.ulagbulag.io/tower-project: sandbox2-ops
+spec:
+  destination:
+    name: sandbox2
+    namespace: argo
+  project: sandbox2-ops
+  sources:
+  - repoURL: https://github.com/SJoon99/smartx-k8s.git
+    path: .
+    targetRevision: main
+    helm:
+      releaseName: smartx
+      valueFiles:
+      - $cluster/values.yaml
+  - repoURL: https://github.com/SJoon99/sandbox2-k8s.git
+    targetRevision: main
+    ref: cluster
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ServerSideApply=true

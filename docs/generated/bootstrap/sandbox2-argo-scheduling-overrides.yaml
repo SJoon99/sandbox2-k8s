@@ -1,0 +1,22 @@
+---
+# Sandbox2 lab override: remove SmartX KISS node affinity for this already-built
+# test cluster, whose nodes do not yet have node-role.kubernetes.io/kiss labels.
+global:
+  affinity:
+    podAntiAffinity: none
+    nodeAffinity:
+      type: none
+controller:
+  affinity: null
+redis:
+  affinity: null
+redisSecretInit:
+  affinity: null
+server:
+  affinity: null
+repoServer:
+  affinity: null
+applicationSet:
+  affinity: null
+notifications:
+  affinity: null

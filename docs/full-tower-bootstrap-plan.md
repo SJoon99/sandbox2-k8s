@@ -64,12 +64,13 @@ Render-only output currently produces:
 2. [done] Render `features: org.ulagbulag.io/gitops` and confirm repo URLs are:
    - `https://github.com/SJoon99/smartx-k8s.git`
    - `https://github.com/SJoon99/sandbox2-k8s.git`
-3. [next] Bootstrap target namespace `argo`.
-4. Install or let SmartX install Argo CD into namespace `argo`.
-5. Create target `AppProject/sandbox2-ops`.
-6. Register in-cluster destination as Argo cluster name `sandbox2`.
-7. Apply root Application `sandbox2` to namespace `argo`.
-8. Migrate/retire old bridge Applications in namespace `argocd` only after target Argo is healthy.
+3. [done] Bootstrap target namespace `argo`.
+4. [done] Install SmartX Argo CD into namespace `argo`.
+5. [done] Create target `AppProject/sandbox2-ops`.
+6. [done] Register in-cluster destination as Argo cluster name `sandbox2`.
+7. [done] Apply root Application `sandbox2` to namespace `argo`.
+8. [done] Retire old bridge namespace `argocd` after backup.
+9. [next] Plan CNI migration before syncing `sandbox2-cilium`.
 
 ## Safety rule
 

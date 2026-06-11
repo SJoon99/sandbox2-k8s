@@ -25,4 +25,5 @@ column -t -s $'\t' docs/generated/gitops-render/summary.tsv
 
 ## Docs
 
+- [Target Argo bootstrap result](docs/target-argo-bootstrap-result-20260611.md)
 - [Full tower bootstrap plan](docs/full-tower-bootstrap-plan.md)

@@ -1,0 +1,74 @@
+applicationSet:
+  metrics:
+    enabled: false
+configs:
+  cm:
+    resource.exclusions: "### Network resources created by the Kubernetes control\
+      \ plane and excluded to reduce the number of watched events and UI clutter\n\
+      - apiGroups:\n  - ''\n  - discovery.k8s.io\n  kinds:\n  - Endpoints\n  - EndpointSlice\n\
+      ### Internal Kubernetes resources excluded reduce the number of watched events\n\
+      - apiGroups:\n  - coordination.k8s.io\n  kinds:\n  - Lease\n### Internal Kubernetes\
+      \ Authz/Authn resources excluded reduce the number of watched events\n- apiGroups:\n\
+      \  - authentication.k8s.io\n  - authorization.k8s.io\n  kinds:\n  - SelfSubjectReview\n\
+      \  - TokenReview\n  - LocalSubjectAccessReview\n  - SelfSubjectAccessReview\n\
+      \  - SelfSubjectRulesReview\n  - SubjectAccessReview\n### Intermediate Certificate\
+      \ Request excluded reduce the number of watched events\n- apiGroups:\n  - certificates.k8s.io\n\
+      \  kinds:\n  - CertificateSigningRequest\n- apiGroups:\n  - cert-manager.io\n\
+      \  kinds:\n  - CertificateRequest\n### Cilium internal resources excluded reduce\
+      \ the number of watched events and UI Clutter\n- apiGroups:\n  - cilium.io\n\
+      \  kinds:\n  - CiliumIdentity\n  - CiliumEndpoint\n  - CiliumEndpointSlice\n\
+      ### Kyverno intermediate and reporting resources excluded reduce the number\
+      \ of watched events and improve performance\n- apiGroups:\n  - kyverno.io\n\
+      \  - reports.kyverno.io\n  - wgpolicyk8s.io\n  kinds:\n  - PolicyReport\n  -\
+      \ ClusterPolicyReport\n  - EphemeralReport\n  - ClusterEphemeralReport\n  -\
+      \ AdmissionReport\n  - ClusterAdmissionReport\n  - BackgroundScanReport\n  -\
+      \ ClusterBackgroundScanReport\n  - UpdateRequest\n"
+  params:
+    application.namespaces: ''
+    resource.exclusions: "- apiGroups:\n    - cilium.io\n  kinds:\n    - CiliumIdentity\n\
+      \  clusters:\n    - \"*\"\n"
+  rbac:
+    policy.csv: 'g, admin, role:admin
+
+      g, sandbox2-admin, role:admin
+
+      g, ops, role:admin
+
+      g, sandbox2-ops, role:admin
+
+      g, sandbox2, role:readonly
+
+      '
+controller:
+  metrics:
+    enabled: false
+global:
+  addPrometheusAnnotations: false
+  domain: cd.argo.sandbox2.sandbox2.local
+  tolerations:
+  - effect: NoExecute
+    key: org.ulagbulag.io/bind
+    operator: Exists
+  - effect: NoExecute
+    key: org.ulagbulag.io/bind.profile
+    operator: Exists
+  - effect: NoExecute
+    key: org.ulagbulag.io/signed-out
+    operator: Exists
+notifications:
+  metrics:
+    enabled: false
+redis:
+  metrics:
+    enabled: false
+repoServer:
+  metrics:
+    enabled: false
+server:
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: sandbox2.sandbox2.local
+    enabled: false
+    ingressClassName: sandbox2.sandbox2.local
+  metrics:
+    enabled: false
