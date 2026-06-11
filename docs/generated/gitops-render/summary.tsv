@@ -1,0 +1,5 @@
+argoNamespace	name	project	destNamespace	destName	destServer	automated	chartOrPath	repo	revision
+argo	sandbox2	sandbox2-ops	argo	sandbox2		True	.	https://github.com/SJoon99/smartx-k8s.git	main
+argo	sandbox2-argo-cd	sandbox2-ops	argo	sandbox2		True	argo-cd	https://argoproj.github.io/argo-helm	9.3.7
+argo	sandbox2-cilium	sandbox2-ops	kube-system	sandbox2			cilium	https://helm.cilium.io	1.18.6
+argo	sandbox2-kubelet-csr-approver	sandbox2-ops	kube-system	sandbox2		True	kubelet-csr-approver	https://postfinance.github.io/kubelet-csr-approver	1.2.12

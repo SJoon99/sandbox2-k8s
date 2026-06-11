@@ -1,0 +1,12 @@
+---
+appVersion: org.ulagbulag.io/v1alpha1
+kind: Manifest
+metadata:
+  name: sandbox2
+spec:
+  group: ops
+  phase: phase-b
+  scale: small
+  users:
+    owners:
+      - SJoon99

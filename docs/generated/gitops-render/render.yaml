@@ -1,0 +1,1135 @@
+---
+# Source: smartx/templates/applications.yaml
+# Features: Keys = ["mobilex.kr/homepage","nvidia.com/gpu","nvidia.com/gpu/dynamic-resource-allocation","nvidia.com/network","org.ulagbulag.io/acceleration","org.ulagbulag.io/acceleration/networking","org.ulagbulag.io/acceleration/storage","org.ulagbulag.io/ai","org.ulagbulag.io/ai/gateway","org.ulagbulag.io/ai/llm","org.ulagbulag.io/ai/llm/openwebui","org.ulagbulag.io/ai/llm/vllm","org.ulagbulag.io/auth","org.ulagbulag.io/auth/keycloak","org.ulagbulag.io/auth/kubernetes","org.ulagbulag.io/auth/sync","org.ulagbulag.io/autoscaling","org.ulagbulag.io/autoscaling/keda","org.ulagbulag.io/autoscaling/service","org.ulagbulag.io/bare-metal-provisioning","org.ulagbulag.io/bare-metal-provisioning/kiss","org.ulagbulag.io/batch/scheduling","org.ulagbulag.io/batch/scheduling/h2pc","org.ulagbulag.io/batch/scheduling/kueue","org.ulagbulag.io/batch/scheduling/ray","org.ulagbulag.io/cni","org.ulagbulag.io/cni/istio","org.ulagbulag.io/cni/multus","org.ulagbulag.io/csi","org.ulagbulag.io/csi/block","org.ulagbulag.io/csi/filesystem","org.ulagbulag.io/csi/object","org.ulagbulag.io/data","org.ulagbulag.io/data/discovery","org.ulagbulag.io/desktop-environment","org.ulagbulag.io/desktop-environment/vine","org.ulagbulag.io/dev","org.ulagbulag.io/distributed-storage-cluster","org.ulagbulag.io/distributed-storage-cluster/ceph","org.ulagbulag.io/distributed-storage-cluster/data-pond","org.ulagbulag.io/gateway","org.ulagbulag.io/gateway/envoy","org.ulagbulag.io/gateway/istio","org.ulagbulag.io/git","org.ulagbulag.io/git/github","org.ulagbulag.io/git/gitlab","org.ulagbulag.io/gitops","org.ulagbulag.io/ingress","org.ulagbulag.io/messenger","org.ulagbulag.io/messenger/kafka","org.ulagbulag.io/messenger/nats","org.ulagbulag.io/monitoring","org.ulagbulag.io/object-store","org.ulagbulag.io/object-store/minio","org.ulagbulag.io/observability","org.ulagbulag.io/observability/vector","org.ulagbulag.io/registry","org.ulagbulag.io/registry/container","org.ulagbulag.io/registry/container/harbor","org.ulagbulag.io/static","org.ulagbulag.io/static/ingress","org.ulagbulag.io/tower","org.ulagbulag.io/visualization","org.ulagbulag.io/visualization/grafana","org.ulagbulag.io/vm","org.ulagbulag.io/vm/kubevirt","org.ulagbulag.io/workflow","org.ulagbulag.io/workflow/argo"]
+# Features: Queue[0]["mobilex.kr/homepage"].requires = org.ulagbulag.io/ingress
+# Features: Queue[0]["mobilex.kr/homepage"].nextQueue = org.ulagbulag.io/ingress
+# Features: Queue[0]["nvidia.com/gpu"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["nvidia.com/gpu"].nextQueue = org.ulagbulag.io/cni
+# Features: Queue[0]["nvidia.com/gpu/dynamic-resource-allocation"].requires = nvidia.com/gpu
+# Features: Queue[0]["nvidia.com/gpu/dynamic-resource-allocation"].nextQueue = nvidia.com/gpu
+# Features: Queue[0]["nvidia.com/network"].requires = nvidia.com/gpu, org.ulagbulag.io/cni
+# Features: Queue[0]["nvidia.com/network"].nextQueue = nvidia.com/gpu, org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/acceleration"].requires = <empty>
+# Features: Queue[0]["org.ulagbulag.io/acceleration"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/acceleration/networking"].requires = org.ulagbulag.io/acceleration, org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/acceleration/networking"].nextQueue = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/acceleration/storage"].requires = org.ulagbulag.io/acceleration, org.ulagbulag.io/csi
+# Features: Queue[0]["org.ulagbulag.io/acceleration/storage"].nextQueue = org.ulagbulag.io/csi
+# Features: Queue[0]["org.ulagbulag.io/ai"].requires = nvidia.com/gpu, org.ulagbulag.io/auth, org.ulagbulag.io/batch/scheduling/kueue, org.ulagbulag.io/cni, org.ulagbulag.io/csi/filesystem
+# Features: Queue[0]["org.ulagbulag.io/ai"].nextQueue = nvidia.com/gpu, org.ulagbulag.io/auth, org.ulagbulag.io/batch/scheduling/kueue, org.ulagbulag.io/cni, org.ulagbulag.io/csi/filesystem
+# Features: Queue[0]["org.ulagbulag.io/ai/gateway"].requires = org.ulagbulag.io/ai, org.ulagbulag.io/gateway
+# Features: Queue[0]["org.ulagbulag.io/ai/gateway"].nextQueue = org.ulagbulag.io/ai, org.ulagbulag.io/gateway
+# Features: Queue[0]["org.ulagbulag.io/ai/llm"].requires = org.ulagbulag.io/ai
+# Features: Queue[0]["org.ulagbulag.io/ai/llm"].nextQueue = org.ulagbulag.io/ai
+# Features: Queue[0]["org.ulagbulag.io/ai/llm/openwebui"].requires = org.ulagbulag.io/ai/llm
+# Features: Queue[0]["org.ulagbulag.io/ai/llm/openwebui"].nextQueue = org.ulagbulag.io/ai/llm
+# Features: Queue[0]["org.ulagbulag.io/ai/llm/vllm"].requires = org.ulagbulag.io/ai/llm
+# Features: Queue[0]["org.ulagbulag.io/ai/llm/vllm"].nextQueue = org.ulagbulag.io/ai/llm
+# Features: Queue[0]["org.ulagbulag.io/auth"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/auth"].nextQueue = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/auth/keycloak"].requires = org.ulagbulag.io/auth, org.ulagbulag.io/cni, org.ulagbulag.io/csi/block, org.ulagbulag.io/ingress
+# Features: Queue[0]["org.ulagbulag.io/auth/keycloak"].nextQueue = org.ulagbulag.io/auth, org.ulagbulag.io/cni, org.ulagbulag.io/csi/block, org.ulagbulag.io/ingress
+# Features: Queue[0]["org.ulagbulag.io/auth/kubernetes"].requires = org.ulagbulag.io/auth, org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/auth/kubernetes"].nextQueue = org.ulagbulag.io/auth, org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/auth/sync"].requires = org.ulagbulag.io/auth
+# Features: Queue[0]["org.ulagbulag.io/auth/sync"].nextQueue = org.ulagbulag.io/auth
+# Features: Queue[0]["org.ulagbulag.io/autoscaling"].requires = org.ulagbulag.io/observability
+# Features: Queue[0]["org.ulagbulag.io/autoscaling"].nextQueue = org.ulagbulag.io/observability
+# Features: Queue[0]["org.ulagbulag.io/autoscaling/keda"].requires = org.ulagbulag.io/autoscaling
+# Features: Queue[0]["org.ulagbulag.io/autoscaling/keda"].nextQueue = org.ulagbulag.io/autoscaling
+# Features: Queue[0]["org.ulagbulag.io/autoscaling/service"].requires = org.ulagbulag.io/autoscaling
+# Features: Queue[0]["org.ulagbulag.io/autoscaling/service"].nextQueue = org.ulagbulag.io/autoscaling
+# Features: Queue[0]["org.ulagbulag.io/bare-metal-provisioning"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/bare-metal-provisioning"].nextQueue = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/bare-metal-provisioning/kiss"].requires = org.ulagbulag.io/bare-metal-provisioning, org.ulagbulag.io/workflow/argo
+# Features: Queue[0]["org.ulagbulag.io/bare-metal-provisioning/kiss"].nextQueue = org.ulagbulag.io/bare-metal-provisioning, org.ulagbulag.io/workflow/argo
+# Features: Queue[0]["org.ulagbulag.io/batch/scheduling"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/batch/scheduling"].nextQueue = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/batch/scheduling/h2pc"].requires = org.ulagbulag.io/batch/scheduling, org.ulagbulag.io/messenger
+# Features: Queue[0]["org.ulagbulag.io/batch/scheduling/h2pc"].nextQueue = org.ulagbulag.io/batch/scheduling, org.ulagbulag.io/messenger
+# Features: Queue[0]["org.ulagbulag.io/batch/scheduling/kueue"].requires = org.ulagbulag.io/batch/scheduling
+# Features: Queue[0]["org.ulagbulag.io/batch/scheduling/kueue"].nextQueue = org.ulagbulag.io/batch/scheduling
+# Features: Queue[0]["org.ulagbulag.io/batch/scheduling/ray"].requires = org.ulagbulag.io/batch/scheduling
+# Features: Queue[0]["org.ulagbulag.io/batch/scheduling/ray"].nextQueue = org.ulagbulag.io/batch/scheduling
+# Features: Queue[0]["org.ulagbulag.io/cni"].requires = <empty>
+# Features: Queue[0]["org.ulagbulag.io/cni"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/cni/istio"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/cni/istio"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/cni/multus"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/cni/multus"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/csi"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/csi"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/csi/block"].requires = org.ulagbulag.io/csi
+# Features: Queue[0]["org.ulagbulag.io/csi/block"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/csi/filesystem"].requires = org.ulagbulag.io/csi
+# Features: Queue[0]["org.ulagbulag.io/csi/filesystem"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/csi/object"].requires = org.ulagbulag.io/csi
+# Features: Queue[0]["org.ulagbulag.io/csi/object"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/data"].requires = org.ulagbulag.io/cni, org.ulagbulag.io/csi
+# Features: Queue[0]["org.ulagbulag.io/data"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/data/discovery"].requires = org.ulagbulag.io/csi/block, org.ulagbulag.io/data
+# Features: Queue[0]["org.ulagbulag.io/data/discovery"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/desktop-environment"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/desktop-environment"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/desktop-environment/vine"].requires = org.ulagbulag.io/desktop-environment, org.ulagbulag.io/gitops, org.ulagbulag.io/workflow/argo
+# Features: Queue[0]["org.ulagbulag.io/desktop-environment/vine"].nextQueue = org.ulagbulag.io/gitops, org.ulagbulag.io/workflow/argo
+# Features: Queue[0]["org.ulagbulag.io/dev"].requires = org.ulagbulag.io/cni, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/filesystem
+# Features: Queue[0]["org.ulagbulag.io/dev"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/distributed-storage-cluster"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/distributed-storage-cluster"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/distributed-storage-cluster/ceph"].requires = org.ulagbulag.io/distributed-storage-cluster
+# Features: Queue[0]["org.ulagbulag.io/distributed-storage-cluster/ceph"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/distributed-storage-cluster/data-pond"].requires = org.ulagbulag.io/distributed-storage-cluster
+# Features: Queue[0]["org.ulagbulag.io/distributed-storage-cluster/data-pond"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/gateway"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/gateway"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/gateway/envoy"].requires = org.ulagbulag.io/gateway
+# Features: Queue[0]["org.ulagbulag.io/gateway/envoy"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/gateway/istio"].requires = org.ulagbulag.io/gateway
+# Features: Queue[0]["org.ulagbulag.io/gateway/istio"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/git"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/git"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/git/github"].requires = org.ulagbulag.io/git
+# Features: Queue[0]["org.ulagbulag.io/git/github"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/git/gitlab"].requires = org.ulagbulag.io/csi/block, org.ulagbulag.io/git
+# Features: Queue[0]["org.ulagbulag.io/git/gitlab"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/gitops"].requires = org.ulagbulag.io/git, org.ulagbulag.io/workflow
+# Features: Queue[0]["org.ulagbulag.io/gitops"].nextQueue = org.ulagbulag.io/workflow
+# Features: Queue[0]["org.ulagbulag.io/ingress"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/ingress"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/messenger"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/messenger"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/messenger/kafka"].requires = org.ulagbulag.io/messenger, org.ulagbulag.io/monitoring
+# Features: Queue[0]["org.ulagbulag.io/messenger/kafka"].nextQueue = org.ulagbulag.io/monitoring
+# Features: Queue[0]["org.ulagbulag.io/messenger/nats"].requires = org.ulagbulag.io/messenger, org.ulagbulag.io/monitoring
+# Features: Queue[0]["org.ulagbulag.io/messenger/nats"].nextQueue = org.ulagbulag.io/monitoring
+# Features: Queue[0]["org.ulagbulag.io/monitoring"].requires = org.ulagbulag.io/cni, org.ulagbulag.io/csi/block
+# Features: Queue[0]["org.ulagbulag.io/monitoring"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/object-store"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/object-store"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/object-store/minio"].requires = org.ulagbulag.io/auth, org.ulagbulag.io/distributed-storage-cluster/ceph, org.ulagbulag.io/object-store
+# Features: Queue[0]["org.ulagbulag.io/object-store/minio"].nextQueue = org.ulagbulag.io/auth
+# Features: Queue[0]["org.ulagbulag.io/observability"].requires = org.ulagbulag.io/cni
+# Features: Queue[0]["org.ulagbulag.io/observability"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/observability/vector"].requires = org.ulagbulag.io/observability
+# Features: Queue[0]["org.ulagbulag.io/observability/vector"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/registry"].requires = org.ulagbulag.io/auth, org.ulagbulag.io/cni, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/ingress
+# Features: Queue[0]["org.ulagbulag.io/registry"].nextQueue = org.ulagbulag.io/auth
+# Features: Queue[0]["org.ulagbulag.io/registry/container"].requires = org.ulagbulag.io/registry
+# Features: Queue[0]["org.ulagbulag.io/registry/container"].nextQueue = org.ulagbulag.io/registry
+# Features: Queue[0]["org.ulagbulag.io/registry/container/harbor"].requires = org.ulagbulag.io/registry/container
+# Features: Queue[0]["org.ulagbulag.io/registry/container/harbor"].nextQueue = org.ulagbulag.io/registry/container
+# Features: Queue[0]["org.ulagbulag.io/static"].requires = <empty>
+# Features: Queue[0]["org.ulagbulag.io/static"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/static/ingress"].requires = org.ulagbulag.io/ingress, org.ulagbulag.io/static
+# Features: Queue[0]["org.ulagbulag.io/static/ingress"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/tower"].requires = org.ulagbulag.io/auth/keycloak, org.ulagbulag.io/gitops, org.ulagbulag.io/ingress, org.ulagbulag.io/observability, org.ulagbulag.io/visualization, org.ulagbulag.io/workflow/argo
+# Features: Queue[0]["org.ulagbulag.io/tower"].nextQueue = org.ulagbulag.io/auth/keycloak, org.ulagbulag.io/gitops, org.ulagbulag.io/visualization, org.ulagbulag.io/workflow/argo
+# Features: Queue[0]["org.ulagbulag.io/visualization"].requires = org.ulagbulag.io/cni, org.ulagbulag.io/csi/filesystem
+# Features: Queue[0]["org.ulagbulag.io/visualization"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/visualization/grafana"].requires = org.ulagbulag.io/monitoring, org.ulagbulag.io/visualization
+# Features: Queue[0]["org.ulagbulag.io/visualization/grafana"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/vm"].requires = org.ulagbulag.io/acceleration, org.ulagbulag.io/cni, org.ulagbulag.io/csi/block
+# Features: Queue[0]["org.ulagbulag.io/vm"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/vm/kubevirt"].requires = org.ulagbulag.io/vm
+# Features: Queue[0]["org.ulagbulag.io/vm/kubevirt"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/workflow"].requires = org.ulagbulag.io/cni, org.ulagbulag.io/messenger
+# Features: Queue[0]["org.ulagbulag.io/workflow"].nextQueue = <empty>
+# Features: Queue[0]["org.ulagbulag.io/workflow/argo"].requires = org.ulagbulag.io/workflow
+# Features: Queue[0]["org.ulagbulag.io/workflow/argo"].nextQueue = <empty>
+# Features: Queue[1]["mobilex.kr/homepage"].requires = org.ulagbulag.io/ingress
+# Features: Queue[1]["mobilex.kr/homepage"].nextQueue = <empty>
+# Features: Queue[1]["nvidia.com/gpu"].requires = org.ulagbulag.io/cni
+# Features: Queue[1]["nvidia.com/gpu"].nextQueue = <empty>
+# Features: Queue[1]["nvidia.com/gpu/dynamic-resource-allocation"].requires = nvidia.com/gpu
+# Features: Queue[1]["nvidia.com/gpu/dynamic-resource-allocation"].nextQueue = <empty>
+# Features: Queue[1]["nvidia.com/network"].requires = nvidia.com/gpu, org.ulagbulag.io/cni
+# Features: Queue[1]["nvidia.com/network"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/acceleration/networking"].requires = org.ulagbulag.io/acceleration, org.ulagbulag.io/cni
+# Features: Queue[1]["org.ulagbulag.io/acceleration/networking"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/acceleration/storage"].requires = org.ulagbulag.io/acceleration, org.ulagbulag.io/csi
+# Features: Queue[1]["org.ulagbulag.io/acceleration/storage"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/ai"].requires = nvidia.com/gpu, org.ulagbulag.io/auth, org.ulagbulag.io/batch/scheduling/kueue, org.ulagbulag.io/cni, org.ulagbulag.io/csi/filesystem
+# Features: Queue[1]["org.ulagbulag.io/ai"].nextQueue = org.ulagbulag.io/auth, org.ulagbulag.io/batch/scheduling/kueue
+# Features: Queue[1]["org.ulagbulag.io/ai/gateway"].requires = org.ulagbulag.io/ai, org.ulagbulag.io/gateway
+# Features: Queue[1]["org.ulagbulag.io/ai/gateway"].nextQueue = org.ulagbulag.io/ai
+# Features: Queue[1]["org.ulagbulag.io/ai/llm"].requires = org.ulagbulag.io/ai
+# Features: Queue[1]["org.ulagbulag.io/ai/llm"].nextQueue = org.ulagbulag.io/ai
+# Features: Queue[1]["org.ulagbulag.io/ai/llm/openwebui"].requires = org.ulagbulag.io/ai/llm
+# Features: Queue[1]["org.ulagbulag.io/ai/llm/openwebui"].nextQueue = org.ulagbulag.io/ai/llm
+# Features: Queue[1]["org.ulagbulag.io/ai/llm/vllm"].requires = org.ulagbulag.io/ai/llm
+# Features: Queue[1]["org.ulagbulag.io/ai/llm/vllm"].nextQueue = org.ulagbulag.io/ai/llm
+# Features: Queue[1]["org.ulagbulag.io/auth"].requires = org.ulagbulag.io/cni
+# Features: Queue[1]["org.ulagbulag.io/auth"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/auth/keycloak"].requires = org.ulagbulag.io/auth, org.ulagbulag.io/cni, org.ulagbulag.io/csi/block, org.ulagbulag.io/ingress
+# Features: Queue[1]["org.ulagbulag.io/auth/keycloak"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/auth/kubernetes"].requires = org.ulagbulag.io/auth, org.ulagbulag.io/cni
+# Features: Queue[1]["org.ulagbulag.io/auth/kubernetes"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/auth/sync"].requires = org.ulagbulag.io/auth
+# Features: Queue[1]["org.ulagbulag.io/auth/sync"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/autoscaling"].requires = org.ulagbulag.io/observability
+# Features: Queue[1]["org.ulagbulag.io/autoscaling"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/autoscaling/keda"].requires = org.ulagbulag.io/autoscaling
+# Features: Queue[1]["org.ulagbulag.io/autoscaling/keda"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/autoscaling/service"].requires = org.ulagbulag.io/autoscaling
+# Features: Queue[1]["org.ulagbulag.io/autoscaling/service"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/bare-metal-provisioning"].requires = org.ulagbulag.io/cni
+# Features: Queue[1]["org.ulagbulag.io/bare-metal-provisioning"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/bare-metal-provisioning/kiss"].requires = org.ulagbulag.io/bare-metal-provisioning, org.ulagbulag.io/workflow/argo
+# Features: Queue[1]["org.ulagbulag.io/bare-metal-provisioning/kiss"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/batch/scheduling"].requires = org.ulagbulag.io/cni
+# Features: Queue[1]["org.ulagbulag.io/batch/scheduling"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/batch/scheduling/h2pc"].requires = org.ulagbulag.io/batch/scheduling, org.ulagbulag.io/messenger
+# Features: Queue[1]["org.ulagbulag.io/batch/scheduling/h2pc"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/batch/scheduling/kueue"].requires = org.ulagbulag.io/batch/scheduling
+# Features: Queue[1]["org.ulagbulag.io/batch/scheduling/kueue"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/batch/scheduling/ray"].requires = org.ulagbulag.io/batch/scheduling
+# Features: Queue[1]["org.ulagbulag.io/batch/scheduling/ray"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/desktop-environment/vine"].requires = org.ulagbulag.io/desktop-environment, org.ulagbulag.io/gitops, org.ulagbulag.io/workflow/argo
+# Features: Queue[1]["org.ulagbulag.io/desktop-environment/vine"].nextQueue = org.ulagbulag.io/gitops
+# Features: Queue[1]["org.ulagbulag.io/gitops"].requires = org.ulagbulag.io/git, org.ulagbulag.io/workflow
+# Features: Queue[1]["org.ulagbulag.io/gitops"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/messenger/kafka"].requires = org.ulagbulag.io/messenger, org.ulagbulag.io/monitoring
+# Features: Queue[1]["org.ulagbulag.io/messenger/kafka"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/messenger/nats"].requires = org.ulagbulag.io/messenger, org.ulagbulag.io/monitoring
+# Features: Queue[1]["org.ulagbulag.io/messenger/nats"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/object-store/minio"].requires = org.ulagbulag.io/auth, org.ulagbulag.io/distributed-storage-cluster/ceph, org.ulagbulag.io/object-store
+# Features: Queue[1]["org.ulagbulag.io/object-store/minio"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/registry"].requires = org.ulagbulag.io/auth, org.ulagbulag.io/cni, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/ingress
+# Features: Queue[1]["org.ulagbulag.io/registry"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/registry/container"].requires = org.ulagbulag.io/registry
+# Features: Queue[1]["org.ulagbulag.io/registry/container"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/registry/container/harbor"].requires = org.ulagbulag.io/registry/container
+# Features: Queue[1]["org.ulagbulag.io/registry/container/harbor"].nextQueue = <empty>
+# Features: Queue[1]["org.ulagbulag.io/tower"].requires = org.ulagbulag.io/auth/keycloak, org.ulagbulag.io/gitops, org.ulagbulag.io/ingress, org.ulagbulag.io/observability, org.ulagbulag.io/visualization, org.ulagbulag.io/workflow/argo
+# Features: Queue[1]["org.ulagbulag.io/tower"].nextQueue = <empty>
+# Features: Queue[2]["org.ulagbulag.io/ai"].requires = nvidia.com/gpu, org.ulagbulag.io/auth, org.ulagbulag.io/batch/scheduling/kueue, org.ulagbulag.io/cni, org.ulagbulag.io/csi/filesystem
+# Features: Queue[2]["org.ulagbulag.io/ai"].nextQueue = <empty>
+# Features: Queue[2]["org.ulagbulag.io/ai/gateway"].requires = org.ulagbulag.io/ai, org.ulagbulag.io/gateway
+# Features: Queue[2]["org.ulagbulag.io/ai/gateway"].nextQueue = <empty>
+# Features: Queue[2]["org.ulagbulag.io/ai/llm"].requires = org.ulagbulag.io/ai
+# Features: Queue[2]["org.ulagbulag.io/ai/llm"].nextQueue = <empty>
+# Features: Queue[2]["org.ulagbulag.io/ai/llm/openwebui"].requires = org.ulagbulag.io/ai/llm
+# Features: Queue[2]["org.ulagbulag.io/ai/llm/openwebui"].nextQueue = <empty>
+# Features: Queue[2]["org.ulagbulag.io/ai/llm/vllm"].requires = org.ulagbulag.io/ai/llm
+# Features: Queue[2]["org.ulagbulag.io/ai/llm/vllm"].nextQueue = <empty>
+# Features: Queue[2]["org.ulagbulag.io/desktop-environment/vine"].requires = org.ulagbulag.io/desktop-environment, org.ulagbulag.io/gitops, org.ulagbulag.io/workflow/argo
+# Features: Queue[2]["org.ulagbulag.io/desktop-environment/vine"].nextQueue = <empty>
+# Features: Map["mobilex.kr/homepage"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/ingress
+# Features: Map["nvidia.com/gpu"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["nvidia.com/gpu/dynamic-resource-allocation"].requiresAll = nvidia.com/gpu, org.ulagbulag.io/cni
+# Features: Map["nvidia.com/network"].requiresAll = nvidia.com/gpu, org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/acceleration"].requiresAll = <empty>
+# Features: Map["org.ulagbulag.io/acceleration/networking"].requiresAll = org.ulagbulag.io/acceleration, org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/acceleration/storage"].requiresAll = org.ulagbulag.io/acceleration, org.ulagbulag.io/cni, org.ulagbulag.io/csi
+# Features: Map["org.ulagbulag.io/ai"].requiresAll = nvidia.com/gpu, org.ulagbulag.io/auth, org.ulagbulag.io/batch/scheduling, org.ulagbulag.io/batch/scheduling/kueue, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/filesystem
+# Features: Map["org.ulagbulag.io/ai/gateway"].requiresAll = nvidia.com/gpu, org.ulagbulag.io/ai, org.ulagbulag.io/auth, org.ulagbulag.io/batch/scheduling, org.ulagbulag.io/batch/scheduling/kueue, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/gateway
+# Features: Map["org.ulagbulag.io/ai/llm"].requiresAll = nvidia.com/gpu, org.ulagbulag.io/ai, org.ulagbulag.io/auth, org.ulagbulag.io/batch/scheduling, org.ulagbulag.io/batch/scheduling/kueue, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/filesystem
+# Features: Map["org.ulagbulag.io/ai/llm/openwebui"].requiresAll = nvidia.com/gpu, org.ulagbulag.io/ai, org.ulagbulag.io/ai/llm, org.ulagbulag.io/auth, org.ulagbulag.io/batch/scheduling, org.ulagbulag.io/batch/scheduling/kueue, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/filesystem
+# Features: Map["org.ulagbulag.io/ai/llm/vllm"].requiresAll = nvidia.com/gpu, org.ulagbulag.io/ai, org.ulagbulag.io/ai/llm, org.ulagbulag.io/auth, org.ulagbulag.io/batch/scheduling, org.ulagbulag.io/batch/scheduling/kueue, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/filesystem
+# Features: Map["org.ulagbulag.io/auth"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/auth/keycloak"].requiresAll = org.ulagbulag.io/auth, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/ingress
+# Features: Map["org.ulagbulag.io/auth/kubernetes"].requiresAll = org.ulagbulag.io/auth, org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/auth/sync"].requiresAll = org.ulagbulag.io/auth, org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/autoscaling"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/autoscaling/keda"].requiresAll = org.ulagbulag.io/autoscaling, org.ulagbulag.io/cni, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/autoscaling/service"].requiresAll = org.ulagbulag.io/autoscaling, org.ulagbulag.io/cni, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/bare-metal-provisioning"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/bare-metal-provisioning/kiss"].requiresAll = org.ulagbulag.io/bare-metal-provisioning, org.ulagbulag.io/cni, org.ulagbulag.io/messenger, org.ulagbulag.io/workflow, org.ulagbulag.io/workflow/argo
+# Features: Map["org.ulagbulag.io/batch/scheduling"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/batch/scheduling/h2pc"].requiresAll = org.ulagbulag.io/batch/scheduling, org.ulagbulag.io/cni, org.ulagbulag.io/messenger
+# Features: Map["org.ulagbulag.io/batch/scheduling/kueue"].requiresAll = org.ulagbulag.io/batch/scheduling, org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/batch/scheduling/ray"].requiresAll = org.ulagbulag.io/batch/scheduling, org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/cni"].requiresAll = <empty>
+# Features: Map["org.ulagbulag.io/cni/istio"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/cni/multus"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/csi"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/csi/block"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi
+# Features: Map["org.ulagbulag.io/csi/filesystem"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi
+# Features: Map["org.ulagbulag.io/csi/object"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi
+# Features: Map["org.ulagbulag.io/data"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi
+# Features: Map["org.ulagbulag.io/data/discovery"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/data
+# Features: Map["org.ulagbulag.io/desktop-environment"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/desktop-environment/vine"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/desktop-environment, org.ulagbulag.io/git, org.ulagbulag.io/gitops, org.ulagbulag.io/messenger, org.ulagbulag.io/workflow, org.ulagbulag.io/workflow/argo
+# Features: Map["org.ulagbulag.io/dev"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/filesystem
+# Features: Map["org.ulagbulag.io/distributed-storage-cluster"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/distributed-storage-cluster/ceph"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/distributed-storage-cluster
+# Features: Map["org.ulagbulag.io/distributed-storage-cluster/data-pond"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/distributed-storage-cluster
+# Features: Map["org.ulagbulag.io/gateway"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/gateway/envoy"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/gateway
+# Features: Map["org.ulagbulag.io/gateway/istio"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/gateway
+# Features: Map["org.ulagbulag.io/git"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/git/github"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/git
+# Features: Map["org.ulagbulag.io/git/gitlab"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/git
+# Features: Map["org.ulagbulag.io/gitops"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/git, org.ulagbulag.io/messenger, org.ulagbulag.io/workflow
+# Features: Map["org.ulagbulag.io/ingress"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/messenger"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/messenger/kafka"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/messenger, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/messenger/nats"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/messenger, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/monitoring"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block
+# Features: Map["org.ulagbulag.io/object-store"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/object-store/minio"].requiresAll = org.ulagbulag.io/auth, org.ulagbulag.io/cni, org.ulagbulag.io/distributed-storage-cluster, org.ulagbulag.io/distributed-storage-cluster/ceph, org.ulagbulag.io/object-store
+# Features: Map["org.ulagbulag.io/observability"].requiresAll = org.ulagbulag.io/cni
+# Features: Map["org.ulagbulag.io/observability/vector"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/registry"].requiresAll = org.ulagbulag.io/auth, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/ingress
+# Features: Map["org.ulagbulag.io/registry/container"].requiresAll = org.ulagbulag.io/auth, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/ingress, org.ulagbulag.io/registry
+# Features: Map["org.ulagbulag.io/registry/container/harbor"].requiresAll = org.ulagbulag.io/auth, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/ingress, org.ulagbulag.io/registry, org.ulagbulag.io/registry/container
+# Features: Map["org.ulagbulag.io/static"].requiresAll = <empty>
+# Features: Map["org.ulagbulag.io/static/ingress"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/ingress, org.ulagbulag.io/static
+# Features: Map["org.ulagbulag.io/tower"].requiresAll = org.ulagbulag.io/auth, org.ulagbulag.io/auth/keycloak, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/git, org.ulagbulag.io/gitops, org.ulagbulag.io/ingress, org.ulagbulag.io/messenger, org.ulagbulag.io/observability, org.ulagbulag.io/visualization, org.ulagbulag.io/workflow, org.ulagbulag.io/workflow/argo
+# Features: Map["org.ulagbulag.io/visualization"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/filesystem
+# Features: Map["org.ulagbulag.io/visualization/grafana"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/monitoring, org.ulagbulag.io/visualization
+# Features: Map["org.ulagbulag.io/vm"].requiresAll = org.ulagbulag.io/acceleration, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block
+# Features: Map["org.ulagbulag.io/vm/kubevirt"].requiresAll = org.ulagbulag.io/acceleration, org.ulagbulag.io/cni, org.ulagbulag.io/csi, org.ulagbulag.io/csi/block, org.ulagbulag.io/vm
+# Features: Map["org.ulagbulag.io/workflow"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/messenger
+# Features: Map["org.ulagbulag.io/workflow/argo"].requiresAll = org.ulagbulag.io/cni, org.ulagbulag.io/messenger, org.ulagbulag.io/workflow
+# Features: Map["mobilex.kr/homepage"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["nvidia.com/gpu"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["nvidia.com/gpu/dynamic-resource-allocation"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["nvidia.com/network"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/acceleration"].optionalAll = <empty>
+# Features: Map["org.ulagbulag.io/acceleration/networking"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/acceleration/storage"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/distributed-storage-cluster, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/ai"].optionalAll = nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/ai/gateway"].optionalAll = nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/ai/llm"].optionalAll = nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/ai/llm/openwebui"].optionalAll = nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/ai/llm/vllm"].optionalAll = nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/auth"].optionalAll = nvidia.com/network, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/auth/keycloak"].optionalAll = nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/auth/kubernetes"].optionalAll = nvidia.com/network, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/auth/sync"].optionalAll = nvidia.com/network, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/autoscaling"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/autoscaling/keda"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/autoscaling/service"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/bare-metal-provisioning"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/bare-metal-provisioning/kiss"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/git, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/batch/scheduling"].optionalAll = org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/batch/scheduling/h2pc"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/autoscaling/keda, org.ulagbulag.io/batch/scheduling/kueue, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/batch/scheduling/kueue"].optionalAll = org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/batch/scheduling/ray"].optionalAll = org.ulagbulag.io/batch/scheduling/kueue, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/cni"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/cni/istio"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/cni/multus"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/csi"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/csi/block"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/csi/filesystem"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/csi/object"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/data"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/data/discovery"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/desktop-environment"].optionalAll = org.ulagbulag.io/ai, org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/gitops, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/desktop-environment/vine"].optionalAll = org.ulagbulag.io/acceleration, org.ulagbulag.io/ai, org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/csi/object, org.ulagbulag.io/git, org.ulagbulag.io/gitops, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability, org.ulagbulag.io/vm/kubevirt
+# Features: Map["org.ulagbulag.io/dev"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/distributed-storage-cluster"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/distributed-storage-cluster/ceph"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/distributed-storage-cluster/data-pond"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/gateway"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/gateway/envoy"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/gateway/istio"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/git"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/git/github"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/git/gitlab"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/gitops"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/git, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/ingress"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/messenger"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/messenger/kafka"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/messenger/nats"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/monitoring"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/object-store"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/object-store/minio"].optionalAll = nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/observability"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/observability/vector"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/registry"].optionalAll = nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/registry/container"].optionalAll = nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/registry/container/harbor"].optionalAll = nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/static"].optionalAll = <empty>
+# Features: Map["org.ulagbulag.io/static/ingress"].optionalAll = org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/tower"].optionalAll = nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/git, org.ulagbulag.io/ingress, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/visualization"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/visualization/grafana"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/vm"].optionalAll = nvidia.com/gpu, nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/cni/multus, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/vm/kubevirt"].optionalAll = nvidia.com/gpu, nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/cni/multus, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/monitoring
+# Features: Map["org.ulagbulag.io/workflow"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/git, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
+# Features: Map["org.ulagbulag.io/workflow/argo"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/git, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
+# Features: .Values.features.enabled = org.ulagbulag.io/cni, org.ulagbulag.io/git, org.ulagbulag.io/gitops, org.ulagbulag.io/messenger, org.ulagbulag.io/workflowmap[apiEndpoint:https://localhost:6443 domainBase:openark domainName: group:default name:sandbox2 nameservers:map[incluster:map[ipv4:10.64.0.3] loadBalancer:map[ipv4:]] pods:map[ipv4:map[childSubnet:10.96.0.0/12 prefix:24 subnet:10.48.0.0/12] ipv6:map[prefix:120 subnet:fd85:ee78:d8a6:8607::1:0000/112]] region:map[timezone:Asia/Seoul] services:map[ipv4:map[childSubnet:10.112.0.0/12 subnet:10.64.0.0/12] kubeProxy:map[enabled:false]] singleNode:false standalone:false]
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/argo-events/manifest.yaml
+# Manifest: apps/argo-events/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/workflow/argo
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/argo-workflows/manifest.yaml
+# Manifest: apps/argo-workflows/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/workflow/argo
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/auth-oidc-login/manifest.yaml
+# Manifest: apps/auth-oidc-login/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/auth/kubernetes
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/aws-mountpoint-s3-csi-driver/manifest.yaml
+# Manifest: apps/aws-mountpoint-s3-csi-driver/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/csi-driver-nfs/manifest.yaml
+# Manifest: apps/csi-driver-nfs/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/csi/filesystem
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/data-pond/manifest.yaml
+# Manifest: apps/data-pond/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/csi, org.ulagbulag.io/distributed-storage-cluster/data-pond
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/envoy-gateway/manifest.yaml
+# Manifest: apps/envoy-gateway/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/gateway/envoy
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/exdns-1/manifest.yaml
+# Manifest: apps/exdns-1/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/ingress
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/exdns-2/manifest.yaml
+# Manifest: apps/exdns-2/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/ingress
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/gateway-api/manifest.yaml
+# Manifest: apps/gateway-api/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/generic-device-plugin/manifest.yaml
+# Manifest: apps/generic-device-plugin/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/desktop-environment/vine
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/github-actions-runner-controller/manifest.yaml
+# Manifest: apps/github-actions-runner-controller/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/gitlab/manifest.yaml
+# Manifest: apps/gitlab/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/grafana-kube-prometheus-stack/manifest.yaml
+# Manifest: apps/grafana-kube-prometheus-stack/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/csi/block, org.ulagbulag.io/monitoring
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/grafana-loki-distributed/manifest.yaml
+# Manifest: apps/grafana-loki-distributed/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/csi/block, org.ulagbulag.io/monitoring
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/grafana-tempo-distributed/manifest.yaml
+# Manifest: apps/grafana-tempo-distributed/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/csi/block, org.ulagbulag.io/monitoring
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/h2pc-nats/manifest.yaml
+# Manifest: apps/h2pc-nats/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/h2pc/manifest.yaml
+# Manifest: apps/h2pc/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/harbor-container-webhook/manifest.yaml
+# Manifest: apps/harbor-container-webhook/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/acceleration/storage, org.ulagbulag.io/registry/container/harbor
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/harbor/manifest.yaml
+# Manifest: apps/harbor/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/registry/container/harbor
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/ingress-nginx/manifest.yaml
+# Manifest: apps/ingress-nginx/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/ingress
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/istio-base/manifest.yaml
+# Manifest: apps/istio-base/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/istio-discovery/manifest.yaml
+# Manifest: apps/istio-discovery/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/istio-gateway/manifest.yaml
+# Manifest: apps/istio-gateway/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/istio-ztunnel/manifest.yaml
+# Manifest: apps/istio-ztunnel/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/keda/manifest.yaml
+# Manifest: apps/keda/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/autoscaling/keda
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/keycloak/manifest.yaml
+# Manifest: apps/keycloak/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/auth/keycloak, org.ulagbulag.io/csi/block
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/kuberay-operator/manifest.yaml
+# Manifest: apps/kuberay-operator/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/batch/scheduling/ray
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/kubevirt-cdi-operator/manifest.yaml
+# Manifest: apps/kubevirt-cdi-operator/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/vm/kubevirt
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/kubevirt-operator/manifest.yaml
+# Manifest: apps/kubevirt-operator/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/vm/kubevirt
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/kueue/manifest.yaml
+# Manifest: apps/kueue/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/llm-d-modelservice/manifest.yaml
+# Manifest: apps/llm-d-modelservice/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/mattermost-operator/manifest.yaml
+# Manifest: apps/mattermost-operator/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/minio/manifest.yaml
+# Manifest: apps/minio/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/object-store/minio
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/mobilex-homepage/manifest.yaml
+# Manifest: apps/mobilex-homepage/manifest.yaml
+# Skipped: disabled-features
+# Features: mobilex.kr/homepage
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/multus/manifest.yaml
+# Manifest: apps/multus/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/cni/multus
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/nvidia-gpu-dra/manifest.yaml
+# Manifest: apps/nvidia-gpu-dra/manifest.yaml
+# Skipped: disabled-features
+# Features: nvidia.com/gpu/dynamic-resource-allocation
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/nvidia-gpu-operator/manifest.yaml
+# Manifest: apps/nvidia-gpu-operator/manifest.yaml
+# Skipped: disabled-features
+# Features: nvidia.com/gpu
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/nvidia-network-operator/manifest.yaml
+# Manifest: apps/nvidia-network-operator/manifest.yaml
+# Skipped: disabled-features
+# Features: nvidia.com/network
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openark-gitops/manifest.yaml
+# Manifest: apps/openark-gitops/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/tower
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openark-kiss/manifest.yaml
+# Manifest: apps/openark-kiss/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/bare-metal-provisioning/kiss
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openark-spectrum-operator/manifest.yaml
+# Manifest: apps/openark-spectrum-operator/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/autoscaling/service
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openark-vine-dashboard/manifest.yaml
+# Manifest: apps/openark-vine-dashboard/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/tower
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openark-vine-session-operator/manifest.yaml
+# Manifest: apps/openark-vine-session-operator/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/desktop-environment/vine
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openark-vine-session-pool/manifest.yaml
+# Manifest: apps/openark-vine-session-pool/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/desktop-environment/vine
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openark-vine-session/manifest.yaml
+# Manifest: apps/openark-vine-session/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openmetadata-airflow/manifest.yaml
+# Manifest: apps/openmetadata-airflow/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openmetadata-mysql/manifest.yaml
+# Manifest: apps/openmetadata-mysql/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openmetadata-opensearch/manifest.yaml
+# Manifest: apps/openmetadata-opensearch/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openmetadata/manifest.yaml
+# Manifest: apps/openmetadata/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openspeedtest/manifest.yaml
+# Manifest: apps/openspeedtest/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/dev
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/opentelemetry-operator/manifest.yaml
+# Manifest: apps/opentelemetry-operator/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/monitoring
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openwebui-provisioning/manifest.yaml
+# Manifest: apps/openwebui-provisioning/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/ai/llm/openwebui
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/openwebui/manifest.yaml
+# Manifest: apps/openwebui/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/ai/llm/openwebui
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/rook-ceph-cluster/manifest.yaml
+# Manifest: apps/rook-ceph-cluster/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/csi, org.ulagbulag.io/distributed-storage-cluster/ceph, org.ulagbulag.io/ingress
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/rook-ceph-operator/manifest.yaml
+# Manifest: apps/rook-ceph-operator/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/csi, org.ulagbulag.io/distributed-storage-cluster/ceph
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/searxng/manifest.yaml
+# Manifest: apps/searxng/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/spark-operator/manifest.yaml
+# Manifest: apps/spark-operator/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/observability
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/static-ingress/manifest.yaml
+# Manifest: apps/static-ingress/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/static/ingress
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/strimzi-kafka-operator/manifest.yaml
+# Manifest: apps/strimzi-kafka-operator/manifest.yaml
+# Skipped: disabled-features
+# Features: org.ulagbulag.io/messenger/kafka
+---
+# Source: smartx/templates/applications.yaml
+# File: apps/vector-agent/manifest.yaml
+# Manifest: apps/vector-agent/manifest.yaml
+# Skipped: disabled-manifest
+---
+# Source: smartx/templates/applications.yaml
+# Manifest: manifest.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "sandbox2"
+  namespace: "argo"
+  finalizers:
+    # The default behaviour is foreground cascading deletion
+    # TODO: Can be changed: https://github.com/argoproj/argo-cd/issues/21035
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    helm.sh/resource-policy: delete
+    org.ulagbulag.io/owners: "Ho Kim <ho.kim@smartx.kr>"
+  labels:
+    app.kubernetes.io/version: "2.0.0-alpha.2"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/name: "sandbox2"
+    app.kubernetes.io/instance: "smartx"
+    argocd.argoproj.io/instance: "sandbox2"
+    org.ulagbulag.io/cluster: "sandbox2"
+    org.ulagbulag.io/group: "ops"
+    org.ulagbulag.io/phase: "stable"
+    org.ulagbulag.io/privileged: "true"
+    org.ulagbulag.io/project: "sandbox2-ops"
+    org.ulagbulag.io/scale: "large"
+    org.ulagbulag.io/tower-cluster: "sandbox2"
+    org.ulagbulag.io/tower-project: "sandbox2-ops"
+spec:
+  destination:
+    name: "sandbox2"
+    namespace: "argo"
+  project: "sandbox2-ops"
+  sources:
+    - repoURL: "https://github.com/SJoon99/smartx-k8s.git"
+      path: "."
+      targetRevision: "main"
+      helm:
+        releaseName: "smartx"
+        valueFiles:
+          - "$cluster/values.yaml"
+    - repoURL: "https://github.com/SJoon99/sandbox2-k8s.git"
+      targetRevision: "default"
+      ref: cluster
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      - ServerSideApply=true
+---
+# Source: smartx/templates/applications.yaml
+# Manifest: apps/argo-cd/manifest.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "sandbox2-argo-cd"
+  namespace: "argo"
+  annotations:
+    helm.sh/resource-policy: keep
+    org.ulagbulag.io/owners: "Ho Kim <ho.kim@smartx.kr>"
+  labels:
+    app.kubernetes.io/version: "2.0.0-alpha.2"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/name: "sandbox2-argo-cd"
+    app.kubernetes.io/instance: "smartx"
+    org.ulagbulag.io/cluster: "sandbox2"
+    org.ulagbulag.io/group: "ops"
+    org.ulagbulag.io/phase: "stable"
+    org.ulagbulag.io/privileged: "false"
+    org.ulagbulag.io/project: "sandbox2-ops"
+    org.ulagbulag.io/scale: "small"
+    org.ulagbulag.io/tower-cluster: "sandbox2"
+    org.ulagbulag.io/tower-project: "sandbox2-ops"
+spec:
+  destination:
+    name: "sandbox2"
+    namespace: "argo"
+  ignoreDifferences:
+    - jsonPointers:
+      - /data/oidc.openid_connect.name
+      - /data/oidc.openid_connect.issuer
+      - /data/oidc.openid_connect.clientID
+      - /data/oidc.openid_connect.clientSecret
+      - /data/server.secretkey
+      - /data/webhook.github.secret
+      kind: Secret
+      name: argocd-secret
+  project: "sandbox2-ops"
+  sources:
+    - repoURL: "https://argoproj.github.io/argo-helm"
+      chart: "argo-cd"
+      targetRevision: "9.3.7"
+      helm:
+        releaseName: "argo-cd"
+        valuesObject:
+          applicationSet:
+            metrics:
+              enabled: false
+          configs:
+            cm:
+              resource.exclusions: |
+                ### Network resources created by the Kubernetes control plane and excluded to reduce the number of watched events and UI clutter
+                - apiGroups:
+                  - ''
+                  - discovery.k8s.io
+                  kinds:
+                  - Endpoints
+                  - EndpointSlice
+                ### Internal Kubernetes resources excluded reduce the number of watched events
+                - apiGroups:
+                  - coordination.k8s.io
+                  kinds:
+                  - Lease
+                ### Internal Kubernetes Authz/Authn resources excluded reduce the number of watched events
+                - apiGroups:
+                  - authentication.k8s.io
+                  - authorization.k8s.io
+                  kinds:
+                  - SelfSubjectReview
+                  - TokenReview
+                  - LocalSubjectAccessReview
+                  - SelfSubjectAccessReview
+                  - SelfSubjectRulesReview
+                  - SubjectAccessReview
+                ### Intermediate Certificate Request excluded reduce the number of watched events
+                - apiGroups:
+                  - certificates.k8s.io
+                  kinds:
+                  - CertificateSigningRequest
+                - apiGroups:
+                  - cert-manager.io
+                  kinds:
+                  - CertificateRequest
+                ### Cilium internal resources excluded reduce the number of watched events and UI Clutter
+                - apiGroups:
+                  - cilium.io
+                  kinds:
+                  - CiliumIdentity
+                  - CiliumEndpoint
+                  - CiliumEndpointSlice
+                ### Kyverno intermediate and reporting resources excluded reduce the number of watched events and improve performance
+                - apiGroups:
+                  - kyverno.io
+                  - reports.kyverno.io
+                  - wgpolicyk8s.io
+                  kinds:
+                  - PolicyReport
+                  - ClusterPolicyReport
+                  - EphemeralReport
+                  - ClusterEphemeralReport
+                  - AdmissionReport
+                  - ClusterAdmissionReport
+                  - BackgroundScanReport
+                  - ClusterBackgroundScanReport
+                  - UpdateRequest
+            params:
+              application.namespaces: ""
+              resource.exclusions: |
+                - apiGroups:
+                    - cilium.io
+                  kinds:
+                    - CiliumIdentity
+                  clusters:
+                    - "*"
+            rbac:
+              policy.csv: |
+                g, admin, role:admin
+                g, sandbox2-admin, role:admin
+                g, ops, role:admin
+                g, sandbox2-ops, role:admin
+                g, sandbox2, role:readonly
+          controller:
+            metrics:
+              enabled: false
+          global:
+            addPrometheusAnnotations: false
+            domain: cd.argo.sandbox2.sandbox2.local
+            tolerations:
+            - effect: NoExecute
+              key: org.ulagbulag.io/bind
+              operator: Exists
+            - effect: NoExecute
+              key: org.ulagbulag.io/bind.profile
+              operator: Exists
+            - effect: NoExecute
+              key: org.ulagbulag.io/signed-out
+              operator: Exists
+          notifications:
+            metrics:
+              enabled: false
+          redis:
+            metrics:
+              enabled: false
+          repoServer:
+            metrics:
+              enabled: false
+          server:
+            ingress:
+              annotations:
+                cert-manager.io/cluster-issuer: sandbox2.sandbox2.local
+              enabled: false
+              ingressClassName: sandbox2.sandbox2.local
+            metrics:
+              enabled: false
+        valueFiles:
+          - "$origin/apps/argo-cd/values.yaml"
+    - repoURL: "https://github.com/SJoon99/smartx-k8s.git"
+      targetRevision: main
+      ref: origin
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      - ServerSideApply=true
+---
+# Source: smartx/templates/applications.yaml
+# Manifest: apps/cilium/manifest.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "sandbox2-cilium"
+  namespace: "argo"
+  annotations:
+    helm.sh/resource-policy: keep
+    org.ulagbulag.io/owners: "Ho Kim <ho.kim@smartx.kr>"
+  labels:
+    app.kubernetes.io/version: "2.0.0-alpha.2"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/name: "sandbox2-cilium"
+    app.kubernetes.io/instance: "smartx"
+    org.ulagbulag.io/cluster: "sandbox2"
+    org.ulagbulag.io/group: "ops"
+    org.ulagbulag.io/phase: "stable"
+    org.ulagbulag.io/privileged: "false"
+    org.ulagbulag.io/project: "sandbox2-ops"
+    org.ulagbulag.io/scale: "small"
+    org.ulagbulag.io/tower-cluster: "sandbox2"
+    org.ulagbulag.io/tower-project: "sandbox2-ops"
+spec:
+  destination:
+    name: "sandbox2"
+    namespace: "kube-system"
+  ignoreDifferences:
+    - jsonPointers:
+      - /data/ca.crt
+      - /data/ca.key
+      kind: Secret
+      name: cilium-ca
+    - jsonPointers:
+      - /data/ca.crt
+      - /data/tls.crt
+      - /data/tls.key
+      kind: Secret
+      name: hubble-relay-client-certs
+    - jsonPointers:
+      - /data/ca.crt
+      - /data/tls.crt
+      - /data/tls.key
+      kind: Secret
+      name: hubble-server-certs
+    - group: monitoring.coreos.com
+      jsonPointers:
+      - /spec/endpoints/0/relabelings/0/action
+      - /spec/endpoints/1
+      kind: ServiceMonitor
+      name: cilium-agent
+    - group: monitoring.coreos.com
+      jsonPointers:
+      - /spec/endpoints/0/relabelings/0/action
+      kind: ServiceMonitor
+      name: cilium-envoy
+  project: "sandbox2-ops"
+  sources:
+    - repoURL: "https://helm.cilium.io"
+      chart: "cilium"
+      targetRevision: "1.18.6"
+      helm:
+        releaseName: "cilium"
+        valuesObject:
+          clustermesh:
+            apiserver:
+              metrics:
+                enabled: false
+                serviceMonitor:
+                  enabled: false
+          dashboards:
+            enabled: false
+          envoy:
+            prometheus:
+              enabled: false
+              serviceMonitor:
+                enabled: false
+          hubble:
+            metrics:
+              dashboards:
+                enabled: false
+              serviceMonitor:
+                enabled: false
+            peerService:
+              clusterDomain: ops.openark
+            relay:
+              prometheus:
+                enabled: false
+                serviceMonitor:
+                  enabled: false
+              tolerations:
+              - effect: NoExecute
+                key: org.ulagbulag.io/bind
+                operator: Exists
+              - effect: NoExecute
+                key: org.ulagbulag.io/bind.profile
+                operator: Exists
+              - effect: NoExecute
+                key: org.ulagbulag.io/signed-out
+                operator: Exists
+            ui:
+              tolerations:
+              - effect: NoExecute
+                key: org.ulagbulag.io/bind
+                operator: Exists
+              - effect: NoExecute
+                key: org.ulagbulag.io/bind.profile
+                operator: Exists
+              - effect: NoExecute
+                key: org.ulagbulag.io/signed-out
+                operator: Exists
+          ipam:
+            operator:
+              clusterPoolIPv4MaskSize: 24
+              clusterPoolIPv4PodCIDRList:
+              - 10.48.0.0/12
+              clusterPoolIPv6MaskSize: 120
+              clusterPoolIPv6PodCIDRList:
+              - fd85:ee78:d8a6:8607::1:0000/112
+          k8sServiceHost: localhost
+          k8sServicePort: "6443"
+          kubeProxyReplacement: true
+          operator:
+            dashboards:
+              enabled: false
+            prometheus:
+              enabled: false
+              serviceMonitor:
+                enabled: false
+          prometheus:
+            enabled: false
+            serviceMonitor:
+              enabled: false
+              trustCRDsExist: true
+          socketLB:
+            hostNamespaceOnly: false
+          tolerations:
+          - operator: Exists
+          - effect: NoExecute
+            key: org.ulagbulag.io/bind
+            operator: Exists
+          - effect: NoExecute
+            key: org.ulagbulag.io/bind.profile
+            operator: Exists
+          - effect: NoExecute
+            key: org.ulagbulag.io/signed-out
+            operator: Exists
+        valueFiles:
+          - "$origin/apps/cilium/values.yaml"
+    - repoURL: "https://github.com/SJoon99/smartx-k8s.git"
+      targetRevision: main
+      ref: origin
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=false
+      - RespectIgnoreDifferences=true
+      - ServerSideApply=true
+---
+# Source: smartx/templates/applications.yaml
+# Manifest: apps/kubelet-csr-approver/manifest.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "sandbox2-kubelet-csr-approver"
+  namespace: "argo"
+  annotations:
+    helm.sh/resource-policy: keep
+    org.ulagbulag.io/owners: "Ho Kim <ho.kim@smartx.kr>"
+  labels:
+    app.kubernetes.io/version: "2.0.0-alpha.2"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/name: "sandbox2-kubelet-csr-approver"
+    app.kubernetes.io/instance: "smartx"
+    org.ulagbulag.io/cluster: "sandbox2"
+    org.ulagbulag.io/group: "ops"
+    org.ulagbulag.io/phase: "stable"
+    org.ulagbulag.io/privileged: "false"
+    org.ulagbulag.io/project: "sandbox2-ops"
+    org.ulagbulag.io/scale: "small"
+    org.ulagbulag.io/tower-cluster: "sandbox2"
+    org.ulagbulag.io/tower-project: "sandbox2-ops"
+spec:
+  destination:
+    name: "sandbox2"
+    namespace: "kube-system"
+  project: "sandbox2-ops"
+  sources:
+    - repoURL: "https://postfinance.github.io/kubelet-csr-approver"
+      chart: "kubelet-csr-approver"
+      targetRevision: "1.2.12"
+      helm:
+        releaseName: "kubelet-csr-approver"
+        valuesObject:
+          tolerations:
+          - effect: NoExecute
+            key: org.ulagbulag.io/bind
+            operator: Exists
+          - effect: NoExecute
+            key: org.ulagbulag.io/bind.profile
+            operator: Exists
+          - effect: NoExecute
+            key: org.ulagbulag.io/signed-out
+            operator: Exists
+        valueFiles:
+          - "$origin/apps/kubelet-csr-approver/values.yaml"
+    - repoURL: "https://github.com/SJoon99/smartx-k8s.git"
+      targetRevision: main
+      ref: origin
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false
+      - RespectIgnoreDifferences=true
+      - ServerSideApply=true

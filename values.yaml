@@ -1,0 +1,72 @@
+---
+# Sandbox2 is intended to follow the full SmartX tower convention.
+# With the current SmartX templates, this single repo block is used both for:
+#   1. the SmartX framework repo:   https://github.com/SJoon99/smartx-k8s.git
+#   2. the cluster preset repo:     https://github.com/SJoon99/sandbox2-k8s.git
+repo:
+  baseUrl: https://github.com
+  owner: SJoon99
+  name: smartx-k8s
+  revision: main
+
+auth:
+  realms:
+    name: sandbox2
+    clientId: kubernetes
+    clientSecret: ""
+    domainName: sandbox2.local
+    defaultRoles:
+      admin:
+        users:
+          - sjoon99
+        groups:
+          - sandbox2-admin
+
+cluster:
+  name: sandbox2
+
+# Phase B target: full SmartX GitOps/tower path.
+# Render-only first; do not apply until SJoon99/smartx-k8s exists and target
+# Argo namespace/project/cluster registration are prepared.
+features:
+  - org.ulagbulag.io/gitops
+
+ingress:
+  domainName: sandbox2.local
+  namespace: ingress-sandbox2-local
+  loadBalancerIPs: {}
+
+kiss:
+  enabled: false
+  auth:
+    ssh:
+      username: ""
+      key:
+        private: ""
+        public: ""
+  group:
+    defaultRole: Worker
+    enableDefaultCluster: false
+    enforceAnsibleControlPlanes: false
+  power:
+    intelAmt:
+      username: ""
+      password: ""
+    ipmi:
+      username: ""
+      password: ""
+  storage:
+    volumes: {}
+
+network:
+  interface:
+    mtu: 1500
+  nameservers:
+    ns1: 1.1.1.1
+    ns2: 8.8.8.8
+
+tower:
+  cluster: sandbox2
+  group: ops
+  controlPlane: false
+  domainName: sandbox2.local
