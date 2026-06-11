@@ -65,3 +65,28 @@ kubectl -n argo get application sandbox2-kubelet-csr-approver -o yaml \
 kubectl -n kube-system get deploy kubelet-csr-approver \
   -o jsonpath='{.spec.template.metadata.labels.sandbox2\.smartx\.patch/sample}{"\n"}'
 ```
+
+## Observed result
+
+Patch propagation succeeded.
+
+```text
+Application sandbox2-kubelet-csr-approver: Synced / Healthy
+Deployment label: sandbox2.smartx.patch/sample=kubelet-csr-approver
+Pods rolled out with the same label.
+```
+
+Observed commands:
+
+```bash
+kubectl -n argo get application sandbox2-kubelet-csr-approver -o wide
+kubectl -n kube-system get deploy kubelet-csr-approver \
+  -o jsonpath='{.spec.template.metadata.labels.sandbox2\\.smartx\\.patch/sample}{"\\n"}'
+kubectl -n kube-system get pods -l app.kubernetes.io/name=kubelet-csr-approver --show-labels
+```
+
+Observed pod labels included:
+
+```text
+sandbox2.smartx.patch/sample=kubelet-csr-approver
+```
