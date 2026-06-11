@@ -24,6 +24,9 @@ auth:
 
 cluster:
   name: sandbox2
+  # SmartX application template uses cluster.group as the cluster repo targetRevision.
+  # Keep this aligned with the sandbox2-k8s default branch.
+  group: main
 
 # Phase B target: full SmartX GitOps/tower path.
 # Render-only first; do not apply until SJoon99/smartx-k8s exists and target

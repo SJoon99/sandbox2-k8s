@@ -351,7 +351,7 @@
 # Features: Map["org.ulagbulag.io/vm/kubevirt"].optionalAll = nvidia.com/gpu, nvidia.com/network, org.ulagbulag.io/auth, org.ulagbulag.io/cni/multus, org.ulagbulag.io/csi/filesystem, org.ulagbulag.io/monitoring
 # Features: Map["org.ulagbulag.io/workflow"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/git, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
 # Features: Map["org.ulagbulag.io/workflow/argo"].optionalAll = org.ulagbulag.io/auth, org.ulagbulag.io/csi/block, org.ulagbulag.io/csi/object, org.ulagbulag.io/git, org.ulagbulag.io/monitoring, org.ulagbulag.io/observability
-# Features: .Values.features.enabled = org.ulagbulag.io/cni, org.ulagbulag.io/git, org.ulagbulag.io/gitops, org.ulagbulag.io/messenger, org.ulagbulag.io/workflowmap[apiEndpoint:https://localhost:6443 domainBase:openark domainName: group:default name:sandbox2 nameservers:map[incluster:map[ipv4:10.64.0.3] loadBalancer:map[ipv4:]] pods:map[ipv4:map[childSubnet:10.96.0.0/12 prefix:24 subnet:10.48.0.0/12] ipv6:map[prefix:120 subnet:fd85:ee78:d8a6:8607::1:0000/112]] region:map[timezone:Asia/Seoul] services:map[ipv4:map[childSubnet:10.112.0.0/12 subnet:10.64.0.0/12] kubeProxy:map[enabled:false]] singleNode:false standalone:false]
+# Features: .Values.features.enabled = org.ulagbulag.io/cni, org.ulagbulag.io/git, org.ulagbulag.io/gitops, org.ulagbulag.io/messenger, org.ulagbulag.io/workflowmap[apiEndpoint:https://localhost:6443 domainBase:openark domainName: group:main name:sandbox2 nameservers:map[incluster:map[ipv4:10.64.0.3] loadBalancer:map[ipv4:]] pods:map[ipv4:map[childSubnet:10.96.0.0/12 prefix:24 subnet:10.48.0.0/12] ipv6:map[prefix:120 subnet:fd85:ee78:d8a6:8607::1:0000/112]] region:map[timezone:Asia/Seoul] services:map[ipv4:map[childSubnet:10.112.0.0/12 subnet:10.64.0.0/12] kubeProxy:map[enabled:false]] singleNode:false standalone:false]
 ---
 # Source: smartx/templates/applications.yaml
 # File: apps/argo-events/manifest.yaml
@@ -741,7 +741,7 @@ spec:
         valueFiles:
           - "$cluster/values.yaml"
     - repoURL: "https://github.com/SJoon99/sandbox2-k8s.git"
-      targetRevision: "default"
+      targetRevision: "main"
       ref: cluster
   syncPolicy:
     automated:
