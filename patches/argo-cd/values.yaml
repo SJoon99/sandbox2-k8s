@@ -1,0 +1,7 @@
+---
+# Sandbox2 gitops-feature patch smoke test.
+# This proves a real gitops feature app (sandbox2-argo-cd) consumes cluster
+# preset values from sandbox2-k8s/patches/argo-cd/values.yaml.
+configs:
+  cm:
+    sandbox2.patch.smoke: "argo-cd"

@@ -907,9 +907,13 @@ spec:
               enabled: false
         valueFiles:
           - "$origin/apps/argo-cd/values.yaml"
+          - "$cluster/patches/argo-cd/values.yaml"
     - repoURL: "https://github.com/SJoon99/smartx-k8s.git"
       targetRevision: main
       ref: origin
+    - repoURL: "https://github.com/SJoon99/sandbox2-k8s.git"
+      targetRevision: "main"
+      ref: cluster
   syncPolicy:
     automated:
       selfHeal: true
