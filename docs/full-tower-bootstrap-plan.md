@@ -40,7 +40,7 @@ https://github.com/SJoon99/smartx-k8s.git
 https://github.com/SJoon99/sandbox2-k8s.git
 ```
 
-`SJoon99/sandbox2-k8s` exists. `SJoon99/smartx-k8s` still needs to be created as a fork/mirror of upstream SmartX before applying the root app-of-apps.
+`SJoon99/sandbox2-k8s` exists. `SJoon99/smartx-k8s` also exists as a fork of upstream SmartX and currently resolves `main` to `e3d4fe9321ef430258e258dece9ce7682ce19f59`.
 
 ## Current feature target
 
@@ -60,11 +60,11 @@ Render-only output currently produces:
 
 ## Migration sequence
 
-1. Create/fork `SJoon99/smartx-k8s`.
-2. Render `features: org.ulagbulag.io/gitops` and confirm repo URLs are:
+1. [done] Create/fork `SJoon99/smartx-k8s`.
+2. [done] Render `features: org.ulagbulag.io/gitops` and confirm repo URLs are:
    - `https://github.com/SJoon99/smartx-k8s.git`
    - `https://github.com/SJoon99/sandbox2-k8s.git`
-3. Bootstrap target namespace `argo`.
+3. [next] Bootstrap target namespace `argo`.
 4. Install or let SmartX install Argo CD into namespace `argo`.
 5. Create target `AppProject/sandbox2-ops`.
 6. Register in-cluster destination as Argo cluster name `sandbox2`.

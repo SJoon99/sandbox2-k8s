@@ -9,7 +9,7 @@ cluster.name = sandbox2
 cluster repo = SJoon99/sandbox2-k8s
 ```
 
-The companion SmartX framework repo must be available as:
+The companion SmartX framework fork is available as:
 
 ```text
 SJoon99/smartx-k8s
