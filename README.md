@@ -25,6 +25,7 @@ column -t -s $'\t' docs/generated/gitops-render/summary.tsv
 
 ## Docs
 
+- [GitOps feature patch smoke test result](docs/gitops-patch-smoke-test-20260611.md)
 - [Patch smoke test result](docs/patch-smoke-test-20260611.md)
 - [Target Argo bootstrap result](docs/target-argo-bootstrap-result-20260611.md)
 - [Full tower bootstrap plan](docs/full-tower-bootstrap-plan.md)
