@@ -1,0 +1,6 @@
+---
+# Sandbox2 patch smoke test.
+# This proves cluster-specific values from sandbox2-k8s/patches are consumed by
+# a SmartX common app whose manifest has spec.app.patched=true.
+podLabels:
+  sandbox2.smartx.patch/sample: "kubelet-csr-approver"
